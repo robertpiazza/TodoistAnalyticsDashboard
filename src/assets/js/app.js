@@ -3,6 +3,7 @@ import { createComparisonChart } from './comparison-chart.js';
 import { createCalendarChart } from './calendar-chart.js';
 import { createNonChartDataTiles } from './non-chart-data-tiles.js';
 import { createMostActiveDaysChart } from './activity-by-weekdays-chart.js';
+import demoDataUrl from 'url:../demo.json';
 
 initializeTooltips();
 
@@ -39,7 +40,7 @@ function initializeTooltips() {
 }
 
 function loadDemoData() {
-  fetch('./assets/demo.json')
+  fetch(demoDataUrl)
     .then(response => response.json())
     .then(data => {
       createCharts(data);
