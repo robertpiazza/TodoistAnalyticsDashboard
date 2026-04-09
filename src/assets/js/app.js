@@ -49,10 +49,32 @@ function loadDemoData() {
 }
 
 function createCharts(data) {
+  if (!data.completed?.items?.length) {
+    showError(
+      'No completed tasks found in this export. The Todoist API only returns ' +
+      'completed task history for paid (Pro/Business) plans. If you are on a ' +
+      'free plan, please use the demo data or upgrade your Todoist subscription.'
+    );
+    return;
+  }
   createCompletedTasksChart(data);
   createMostActiveDaysChart(data);
   createNonChartDataTiles(data);
   createComparisonChart(data);
   createCalendarChart(data);
+}
+
+function showError(message) {
+  const existing = document.getElementById('dashboard-error');
+  if (existing) existing.remove();
+
+  const alert = document.createElement('div');
+  alert.id = 'dashboard-error';
+  alert.className = 'alert alert-warning alert-dismissible mx-3 mt-3';
+  alert.setAttribute('role', 'alert');
+  alert.innerHTML = `<strong>Could not load data:</strong> ${message}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
+
+  document.querySelector('main').prepend(alert);
 }
 
