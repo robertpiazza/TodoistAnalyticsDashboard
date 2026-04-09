@@ -84,8 +84,8 @@ return {
 function getArrayOfDatesFromTaskCreationToLastCompleted(
   selectedTaskOccurances
 ) {
-  const startDate = selectedTaskOccurances[0].item_object.added_at;
-  const endDate = selectedTaskOccurances[0].completed_at;
+  const startDate = new Date(selectedTaskOccurances[0].item_object.added_at);
+  const endDate = new Date(selectedTaskOccurances[0].completed_at);
   return dateFns.eachDayOfInterval({
     start: startDate,
     end: endDate,

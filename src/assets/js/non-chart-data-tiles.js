@@ -17,7 +17,7 @@ function populateOldestUncompletedTasksList(data) {
   }
 
   oldestTasks.forEach((task) => {
-    const addedDate = dateFns.format(task.added_at, 'dd MMM yyyy');
+    const addedDate = dateFns.format(new Date(task.added_at), 'dd MMM yyyy');
     let listItemElement = document.createElement('li');
     listItemElement.textContent = `${task.content} - ${addedDate}`;
     taskListElement.appendChild(listItemElement);

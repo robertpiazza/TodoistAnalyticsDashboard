@@ -176,7 +176,7 @@ function groupByTimePeriod(data, timePeriod) {
     let date = new Date(item.completed_at);
     switch (timePeriod) {
       case 'day':
-        dateKey = dateFns.format(item.completed_at, 'dd MMM yyyy');
+        dateKey = dateFns.format(new Date(item.completed_at), 'dd MMM yyyy');
         break;
       case 'week':
         dateKey = getWeekNumber(date);

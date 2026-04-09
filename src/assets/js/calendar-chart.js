@@ -187,8 +187,8 @@ function createChartData(calendarData) {
           const startDate = c.dataset.data[0].x;
           const endDate = c.dataset.data[c.dataset.data.length - 1].x;
           const weeks = dateFns.eachWeekOfInterval({
-            end: endDate,
-            start: startDate,
+            end: new Date(endDate),
+            start: new Date(startDate),
           }, { weekStartsOn: 1 });
           const a = c.chart.chartArea || {};
           return (a.right - a.left) / weeks.length;
@@ -220,7 +220,7 @@ function createChartOptions(scales) {
           },
           label(context) {
             const calendarData = context.dataset.data[context.dataIndex];
-            return [dateFns.format(calendarData.d, 'dd MMMM yyyy'), calendarData.v === 1 ? 'Completed' : 'Missed'];
+            return [dateFns.format(new Date(calendarData.d), 'dd MMMM yyyy'), calendarData.v === 1 ? 'Completed' : 'Missed'];
           },
         },
       },
@@ -238,8 +238,8 @@ function createChartOptions(scales) {
 function getArrayOfDatesFromTaskCreationToLastCompleted(
   selectedTaskOccurances
 ) {
-  const startDate = selectedTaskOccurances[0].item_object.added_at;
-  const endDate = selectedTaskOccurances[0].completed_at;
+  const startDate = new Date(selectedTaskOccurances[0].item_object.added_at);
+  const endDate = new Date(selectedTaskOccurances[0].completed_at);
   return dateFns.eachDayOfInterval({
     start: startDate,
     end: endDate,

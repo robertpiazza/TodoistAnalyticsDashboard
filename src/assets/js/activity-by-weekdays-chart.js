@@ -24,7 +24,7 @@ function groupByWeekDaysAndCount(data) {
   };
 
   data.completed.items.forEach((item) => {
-    const dayOfWeek = dateFns.format(item.completed_at, 'EEEE');
+    const dayOfWeek = dateFns.format(new Date(item.completed_at), 'EEEE');
 
     daysOfWeek[dayOfWeek]++;
   });
